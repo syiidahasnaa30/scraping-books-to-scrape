@@ -1,12 +1,13 @@
 import scrapy
 
-class LTMPTScraper(scrapy.Spider):
+class BookToScrape(scrapy.Spider):
     name = "book-to-scrape"
 
+    #melakukan request http awal ke url, spider akan mengirimkan permintaan GET ke URL tersebut
     def start_requests(self):
       url = 'https://books.toscrape.com/'
       yield scrapy.Request(url=url, callback=self.parse)
-    
+    #fungsi untuk menangani response
     def parse(self, response):
       for data in response.css('ol li article'):
         yield {
